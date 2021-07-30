@@ -8,7 +8,8 @@ const Reservation = require("./reservation");
 /** Customer of the restaurant. */
 
 class Customer {
-  constructor({ id, firstName, lastName, phone, notes }) {
+  constructor({ id, firstName, lastName, phone, notes }) { 
+    // notice that the above line is a destructured object!
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -28,6 +29,7 @@ class Customer {
            FROM customers
            ORDER BY last_name, first_name`,
     );
+    // returns an array of new customer instances
     return results.rows.map(c => new Customer(c));
   }
 
@@ -54,6 +56,10 @@ class Customer {
     }
 
     return new Customer(customer);
+  }
+  /** Display customer first and last names as one string.  */
+  fullName() {
+    return `${this.firstName} ${this.lastName}`
   }
 
   /** get all reservations for this customer. */

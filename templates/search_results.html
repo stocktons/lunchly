@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Search Results{% endblock %}
+{% block content %}
+
+<a class="btn btn-primary" style="float: right" href="/add/">Add a Customer</a>
+
+<h1>Search Results</h1>
+
+{% if (searchResults | length > 0) %}
+<ul style="column-count: 4">
+    {% for customer in searchResults %}
+        <li>
+            <a href="/{{ customer.id }}/">
+                {{ customer.fullName() }}
+            </a>
+        </li>
+    
+    {% endfor %}
+</ul>
+
+    {% else %}
+    <div class="row">
+    <div class="col-6">
+        <h3>{{ searchTerm }} not found.</h3>
+        <a href="/">
+            <p>Go home</p>
+        </a>
+    </div>
+    </div>
+{% endif %}
+
+{% endblock %}

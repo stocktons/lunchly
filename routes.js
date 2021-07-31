@@ -16,6 +16,21 @@ router.get("/", async function (req, res, next) {
   return res.render("customer_list.html", { customers });
 });
 
+/** Search the list of customers. */
+// or could make this an if statement in .get /
+router.get("/search", async function (req, res, next) {
+  const searchResults = await Customer.search(req.query.search);
+  const searchTerm = req.query.search;
+  return res.render("search_results.html", { searchResults, searchTerm });
+})
+
+/** Display the list of top ten customers. */
+
+router.get("/top-ten", async function (req, res, next) {
+  const customers = await Customer.topTen(req.body);
+  return res.render("top_ten.html", { customers });
+})
+
 /** Form to add a new customer. */
 
 router.get("/add/", async function (req, res, next) {

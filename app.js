@@ -18,6 +18,8 @@ nunjucks.configure("templates", {
   express: app,
 });
 
+app.use(Express.static('static')); // links to static folder 
+// Express.static is the function and the folder is 'static'
 app.use(routes);
 
 
